@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .box {
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        display: inline-block;
+        background-color: brown;
+        padding: 10px;
+        text-align: -webkit-center;
+      }
+        .grid {
+          grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+          text-align: center;
+        }
+        .activated {
+            display: none;
+        }
+      
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'selection.css' %}">
+  </head>
+  <body>
+        
+      Number of rows: <input type="number" id="numRows" value="1">
+      Number of columns: <input type="number" id="numCols" value="1">
+      <button type="button" onclick="createGrid()">Create Grid</button>
+    
+    <div id="grid" class="grid"></div>
+    
+    <button type="button" class="activated" onclick="renumber()" id="renumber">Renumber</button>
+    <form method="POST" id="form">{% csrf_token %}
+        <input type="hidden" name="tables" id="tables"></input>
+        <label>Layout/Floor Name</label>
+        <input type="text" name="name" id="name" required></input>
+        <button type="button" class="activated" onclick="getdata()">Submit</button>
+    </form>
+    
+    
+    <script>
+        function renumber(){
+            var count = 1
+            var grid = document.getElementById("grid");
+            var divs = grid.getElementsByClassName("box")
+            console.log(divs)
+            for(var i = 0; i< divs.length;i++){
+                if (divs[i].style.opacity==""){
+                    divs[i].innerHTML = count++;
+                }
+            }    
+        }
+
+        function getdata(){
+
+            if (document.querySelector('[name="name"]').value.length == 0){
+					document.querySelector('[name="name"]').setCustomValidity("Required")
+					document.querySelector('[name="name"]').reportValidity();
+                    return
+			}
+            var grid = document.getElementById("grid");
+            var boxes = {}
+            var divs = grid.getElementsByClassName("box")
+            //console.log(divs)
+            for(var i = 0; i< divs.length;i++){
+                if (divs[i].style.opacity==""){
+                    boxes[i+1] = {}
+                    boxes[i+1].i = divs[i].dataset.i
+                    boxes[i+1].j = divs[i].dataset.j
+                }
+            }    
+            console.log(boxes)  
+            data = {"plan":boxes,"numRows":document.getElementById("numRows").value, "numCols":document.getElementById("numCols").value}
+            var form = document.getElementById("form")
+            form.querySelector("#tables").value = JSON.stringify(data)
+            console.log(form)
+            form.submit()
+        }
+
+      function createGrid() {
+        const toactivate = document.querySelectorAll('.activated');
+        toactivate.forEach(div => {
+        div.style.display = "block";
+        });
+        var numRows = document.getElementById("numRows").value;
+        var numCols = document.getElementById("numCols").value;
+        var grid = document.getElementById("grid");
+
+        grid.innerHTML = "";
+        var count = 1;
+        for (var i = 0; i < numRows; i++) {
+          for (var j = 0; j < numCols; j++) {
+            var box = document.createElement("div");
+            box.innerHTML = count;
+            count++;
+            box.classList.add("box");
+            box.dataset.i = i;
+            box.dataset.j = j;
+            box.addEventListener("click", function(event) {
+                console.log(event.target.style)
+              if (event.target.style.opacity == "") {
+                event.target.style.opacity = "0";
+              } else {
+                event.target.style.opacity = "";
+              }
+            });
+            grid.appendChild(box);
+          }
+          var br = document.createElement("br");
+          grid.appendChild(br);
+        }
+      }
+    </script>
+  
+  </body>
+</html>

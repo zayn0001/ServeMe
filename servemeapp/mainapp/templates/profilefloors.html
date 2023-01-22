@@ -1,0 +1,66 @@
+{% extends 'managerprofile.html' %}
+
+{% block content %}
+<br>    
+<div>
+    <div id="grid" class="grid"></div>
+    
+    <style>
+        .box {
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        display: inline-block;
+        background-color: brown;
+        padding: 10px;
+        text-align: -webkit-center;
+      }
+    .grid {
+          grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+          text-align: center;
+        }
+    </style>
+    <script>
+        function decodeHtml(html){
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+        }
+
+        var numRows = "{{numRows}}"
+        var numCols = "{{numCols}}"
+        var plan = decodeHtml("{{plan}}")
+        plan = JSON.parse(plan)
+        values = Object.values(plan)
+        console.log(values) 
+        for (var obj in values){
+            
+            console.log(values[obj].i, values[obj].j)
+        }
+        var grid = document.getElementById("grid");
+        grid.innerHTML = "";
+        var count = 1;
+        for (var i = 0; i < numRows; i++) {
+          for (var j = 0; j < numCols; j++) {
+            var box = document.createElement("div");
+            box.innerHTML = count;
+            count++;
+            box.classList.add("box");
+            box.dataset.i = i;
+            box.dataset.j = j;
+            box.style.opacity = "0"
+            for (var obj in values){
+                if(i==values[obj].i && j==values[obj].j){
+                    box.style.opacity = ""
+                    console.log(i,j)
+                }
+            }
+            grid.appendChild(box);
+          }
+          var br = document.createElement("br");
+          grid.appendChild(br);
+        }
+    </script>
+</div>
+
+{% endblock %}

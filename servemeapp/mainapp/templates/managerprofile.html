@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'selection.css' %}">
+</head>
+<body>
+    <style>
+        body {margin:0;}
+        
+        ul {
+          list-style-type: none;
+          margin: 0;
+          overflow: hidden;
+          background-color: #333;
+          position: initial;
+          top: 0;
+          width: 100%;
+          padding: 2%;
+        }
+        
+        li {
+          float: left;
+        }
+        
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 10% 22px;
+          text-decoration: none;
+        }
+        
+        li a:hover:not(.active) {
+          background-color: #111;
+        }
+        
+        .active {
+          background-color: #04AA6D;
+        }
+        </style>
+<div>
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="/{{managername}}/profile/createfloor/">Create Layout</a></li>
+        <li><a href="/{{managername}}/profile/layouts/">Layouts</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="/{{managername}}/profile/menu/">Menu</a></li>
+        <li><a href="/{{managername}}/profile/createmenu/">Add to Menu</a></li>
+    </ul><br>
+</div>
+{% block content %}
+
+{% endblock %}
+    
+</body>
+</html>

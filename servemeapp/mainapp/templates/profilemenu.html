@@ -1,0 +1,42 @@
+{% extends 'managerprofile.html' %}
+
+{% block content %}
+<div>
+    <form method="POST" id="form">
+        {% csrf_token %}
+        <grid id="grid"></grid>
+    </form>
+</div>
+<style>
+    .items {
+        border: solid;
+        margin: auto;
+        display: grid;
+        margin: 10px;
+        align-content: center;
+    }
+</style>
+<script>
+    function decodeHtml(html){
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+    //console.log("dsfsd")
+    grid = document.getElementById("grid")
+    menu = decodeHtml("{{menu}}")
+    menu = JSON.parse(menu)
+    console.log(menu)
+    for (item in menu){
+        console.log(item)
+        newdiv = document.createElement("div");
+        newdiv.classList.add("items")
+        newdiv.innerHTML = menu[item]["name"] + "<br>" + menu[item]["price"] +"<br>"+ menu[item]["description"]
+        document.getElementById("grid").appendChild(newdiv)
+    }
+    
+</script>
+
+
+{% endblock %}

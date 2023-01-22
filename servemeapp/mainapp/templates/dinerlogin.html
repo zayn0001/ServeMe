@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'selection.css' %}">
+</head>
+<body>
+    <div>
+        <div class="login">
+            <h1><i>login</i></h1>
+            {{error}}
+            <form method="POST">
+                {% csrf_token %}
+             USERNAME <br> <input type="text" class="input1" name="username"><BR>
+             PASSWORD<br><input type="password" class="input2" name="password"><BR>
+                <button type="submit" class="input3">SUBMIT</button>
+            </form>
+        </div>
+</body>
+</html>
