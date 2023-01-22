@@ -32,7 +32,7 @@
     margin:0px auto;
 }
 .login{
-    background-image: url("https://previews.123rf.com/images/akz/akz1809/akz180902298/108527581-outdoor-cafe-design-near-sea-water-relaxation-place-on-the-beach-many-empty-tables-and-chairs.jpg");
+    background-color: #17140b;
      background-size: cover;
      margin: 1%;
     height: 100vw;
@@ -46,32 +46,35 @@
     justify-content:center;
     align-items: center;
     margin-left: 30%;
+    color: #fff;
 }
 
 .input1{
-    background-color: rgb(164, 250, 250);
+    background-color: #fff;
     box-sizing: border-box;
     width: 100%;
     padding: 6px;
     margin: 8px;
-    border-radius: 20px
+    border-radius: 0px
 }
 
 
 .input2{
-    background-color: rgb(164, 250, 250);
+    background-color: #fff;
     box-sizing: border-box;
     width: 100%;
     padding: 6px;
     margin: 8px;
-    border-radius: 20px
+    border-radius: 0 px
 }
 .input3{
     margin-top: 15%;
-    width: 90%;
-    height: 25%;
-    background-color: aqua;
-    border-radius: 20px
+    margin-left: 8px;
+    width: 100%;
+   
+   height: 20%;
+    background-color:rgb(101, 199, 223);
+    border-radius: 0px;
 }
 
 * {box-sizing: border-box}
