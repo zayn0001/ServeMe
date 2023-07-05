@@ -1,3 +1,3 @@
 # ServeMe
 
-activate the serve me env and run 'python manage.py runserver'
+go to https://serveme.onrender.com
